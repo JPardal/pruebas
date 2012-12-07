@@ -8,7 +8,8 @@ class Torneo extends CI_controller{
 		
 		$this->load->database();
 		$this->load->helper('url'); 
-		$this->load->library('grocery_CRUD');   
+		$this->load->library('grocery_CRUD'); 
+                $this->load->library('RRobin');
 	}
 	
 	public function index()
@@ -79,6 +80,37 @@ class Torneo extends CI_controller{
 	
         function crear_torneo_liga()
         {
+            $id_torneo=1;
+            $tipo=1;
+            $this->load->model('Partida_model');
+            $this->load->model('Inscripcion_model');
             
+           $torneo = new RRobin();
+           $participantes = $this->Inscripcion_model->get_inscritos($id_torneo);
+           if()
+           if($torneo->create($participantes))
+           {
+               $numero_participantes = $torneo->tot_games;
+               $partidas = $torneo->tour;
+               
+               $data = Array(
+                        'id_jugador1',
+                        'id_jugador2',
+                        'id_partida',
+                        'fecha_partida',
+                        'resultado_partida',
+                        'estadisticas_partida',
+                        'id_ganador',
+                        'id_equipo1',
+                        'id_equipo2',
+                        'id_torneo'
+		);
+               $this->Partida_model->insert_partidaBasica();
+               
+           }
+           else
+           {
+               echo'error al crear el torneo';
+           }
         }
 }

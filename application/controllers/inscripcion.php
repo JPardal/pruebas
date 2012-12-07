@@ -32,5 +32,11 @@ class Inscripcion extends CI_controller{
 	{
 	$this->load->view('usuarios.php',$output);    
 	}
-		
+	
+        public function get_inscritos($id_torneo)
+        {
+        $this->load->model("inscripcion_model");  
+        
+         return $this->inscripcion_model->get_inscritos($id_torneo);
+        }
 }

@@ -28,6 +28,26 @@ class Partida_model extends CI_Model {
              }              
           return  $this->db->insert('partida', $data);
 	}
+        public function insert_partidaTorneo($id_torneo,$id_jugador1,$id_jugador2,$id_equipo1,$id_equipo2,$fecha_partida)
+	{
+            if($this->input->post('id_jugador1'))
+            {
+            $data = array(
+                    'id_jugador1' => $this->input->post('id_jugador1'),
+                    'id_jugador2' => $this->input->post('id_jugador2'),
+                    'fecha_partida'=> $this->input->post('fecha_partida'),
+                    );
+            }else
+            {
+                $data = array(
+                    'id_equipo1' => $this->input->post('id_equipo1'),
+                    'id_equipo2' => $this->input->post('id_equipo2'),
+                    'fecha_partida'=> $this->input->post('fecha_partida'),
+                    );
+
+             }              
+          return  $this->db->insert('partida', $data);
+	}
         
         public function update_partidaBasica()
         {
